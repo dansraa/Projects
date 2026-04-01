@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <string>
+#include <cmath>
 
 namespace first{
     int x = 1;
@@ -82,6 +84,61 @@ int main() {
     number_t pizzaAmount = 5;
 
         std::cout << pizza << pizzaAmount <<'\n';
+
+    
+    // Arithmetic Operators
+    int students = 10;
+    int b = 3;
+
+    students = students + 1; // Addition
+    students +1; // Addition (does not change the value of students)
+    students--; // Subtraction
+    students-=2; // Subtraction
+    students *= 2; // Multiplication
+    students = students * 2; // Multiplication
+    students /= 2; // Division
+    students = students / 2; // Division
+    int remainder = students % b; // Modulo (gives the remainder of the division)
+
+
+    // Type conversion. Convert a value of one data type to another.
+    double convert = (int)3.14; // C-style cast. Converts the double value 3.14 to an integer, resulting in 3.
+    std::cout << "The converted value is: " << convert << '\n';
+
+    // Accepting user input
+    std::string userInput;
+    std::cout << "Enter your name: ";
+    //std::cin >> userInput; // Takes input from the user and stores it in the variable userInput. "cin" stands for "character input". It reads input from the standard input (usually the keyboard) and stores it in the variable provided.
+    // Below allows for space in the input, while the above does not.
+    std::getline(std::cin, userInput); // Reads a line of text from the standard input and stores it in the variable userInput. It allows for spaces in the input.
+    
+    std::cout << "Hello, " << userInput << "!" << '\n'; 
+
+    //Useful math functions
+    double num_x = 3;
+    double num_y = 4;
+    double greaterVal;
+    double minVal;
+    double powerFun;
+    double squareRoot;
+    double absVal;
+    double roundVal;
+    double roundDownVal;
+    double roundUpVal;
+
+    greaterVal = std::max(num_x, num_y); // Returns the greater of the two values.
+    minVal = std::min(num_x, num_y); // Returns the lesser of the two values.
+    std::cout << "The greater value is: " << greaterVal << '\n';
+    std::cout << "The lesser value is: " << minVal << '\n';
+
+    powerFun = pow(num_x, num_y); // Returns the value of num_x raised to the power of num_y.
+    squareRoot = sqrt(num_x); // Returns the square root of num_x.
+    absVal = abs(num_x); // Returns the absolute value of -5, which is 5.
+    roundVal = round(3.14); // Rounds the value to the nearest integer, which is 3.
+    roundDownVal = floor(3.14); // Rounds the value down to the nearest integer, which is 3.
+    roundUpVal = ceil(3.14); // Rounds the value up to the nearest integer, which is 4.
+    std::cout << powerFun << '\n';
+    std::cout << squareRoot << '\n';
 
     return 0;
 }
