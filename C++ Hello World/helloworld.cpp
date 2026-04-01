@@ -76,7 +76,7 @@ int main() {
     std::cout << "The value of x in the second namespace is: " << second::x << '\n';
 
     // typedef is used to give an alias for a data type. It can make code more readable and easier to understand.
-    typedef std::string text_t; // Gives the huge line of code a simpler name "NameAgeList"
+    typedef std::string text_t; // Gives the huge line of code a simpler name "NameAgeList".
     typedef int number_t;
     text_t pizza = "Pizza is delicious!";
     number_t pizzaAmount = 5;
