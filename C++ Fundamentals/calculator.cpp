@@ -49,7 +49,10 @@ int main() {
                 std::cout << "Error: Modulo by zero is not allowed." << '\n';
             }
             break;
-
     }
+
+    // Ternary operator. '?' means "if" and ':' means "else". It is a shorthand for an if-else statement. It is used to assign a value to a variable based on a condition.
+    // Simpler way of writing an if statement. It is a shorthand for an if-else statement. It is used to assign a value to a variable based on a condition.
+    result > 1000000 ? std::cout << "Wow, that's a big number!" << '\n' : std::cout << "The result is manageable." << '\n';
 
 }
