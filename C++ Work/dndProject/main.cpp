@@ -1,7 +1,7 @@
 #include <iostream>
 #include <ctime> //Randomness
 
-// Enemy Stats
+// Entity Stat Structure
 struct Entity {
     int health = 100;
     int attackPower = 10;
