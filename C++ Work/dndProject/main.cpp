@@ -4,11 +4,12 @@
 // Entity Stat Structure
 struct Entity {
     int health = 100;
-    int attackPower = 10;
+    int attackPower = 10; // Currently Irrelevant.
 };
 
 void enemyEncounter();
 void playerAttack(Entity &enemy);
+void enemyAttack(Entity &player);
 
 
 // Main Menu
@@ -42,7 +43,7 @@ int main() {
 // Test Enemy Encounter Function
 void enemyEncounter(){
 
-    Entity enemy = {10, 10}; // Create an enemy with 100 health and 10 attack power.
+    Entity enemy = {50, 10}; // Create an enemy with 100 health and 10 attack power.
     Entity player = {100, 10}; // Create a player with 100 health and 10 attack power.
 
     int choice = 0;
@@ -59,6 +60,8 @@ void enemyEncounter(){
                 std::cout << "You attack the enemy!\n";
                 playerAttack(enemy);
                 std::cout << "Enemy health: " << enemy.health << "\n";
+                enemyAttack(player);
+                std::cout << "Player health: " << player.health << "\n";
                 break;
             case 2: 
                 std::cout << "You defend against the enemy's attack!\n";
@@ -80,6 +83,19 @@ void playerAttack(Entity &enemy){
     damage = rand() % 10 + 1; // Random damage between 1 and 10
 
     enemy.health -= damage; // Subtract damage from enemy health
+
+    std::cout << "You dealt " << damage << " damage to the enemy!\n";
+}
+
+// Test Enemy Attack
+void enemyAttack(Entity &player){
+
+    srand(time(NULL)); // Seed the random number generator with the current time.
+
+    int damage = 0;
+    damage = rand() % 10 + 5; // Random damage between 1 and 10
+
+    player.health -= damage; // Subtract damage from enemy health
 
     std::cout << "You dealt " << damage << " damage to the enemy!\n";
 }
