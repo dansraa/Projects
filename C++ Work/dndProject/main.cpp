@@ -99,3 +99,5 @@ void enemyAttack(Entity &player){
 
     std::cout << "You dealt " << damage << " damage to the enemy!\n";
 }
+
+//test
