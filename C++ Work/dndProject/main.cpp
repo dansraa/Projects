@@ -60,6 +60,7 @@ void encounterType(){
     }
 }
 
+
 // Test Enemy Encounter Function
 void enemyEncounter(){
 
