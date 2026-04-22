@@ -8,6 +8,7 @@ struct Entity {
 };
 
 void enemyEncounter();
+void encounterType();
 void playerAttack(Entity &enemy);
 void enemyAttack(Entity &player);
 
@@ -26,7 +27,7 @@ int main() {
            switch(choice){
               case 1:
                std::cout << "Starting new game...\n";
-                  enemyEncounter();
+                  encounterType();
                 break;
              case 2: 
                     std::cout << "Loading game...\n";
@@ -38,6 +39,25 @@ int main() {
             }
     }while(choice != 3);
     return 0;
+}
+
+// Test Encounter Type Function
+void encounterType(){
+    srand(time(NULL)); // Seed random number generator with current time.
+    int encounter = rand() % 3 + 1; // Generate a random number between 1 and 3 to determine the type of encounter.
+
+    switch(encounter){
+        case 1:
+            enemyEncounter();
+            break;
+        case 2:
+            std::cout << "You have found a treasure chest!\n";
+            break;
+        case 3:
+            std::cout << "You have found a hidden passage!\n";
+            break;
+        default: std::cout << "Invalid encounter type generated.\n";
+    }
 }
 
 // Test Enemy Encounter Function
@@ -100,4 +120,3 @@ void enemyAttack(Entity &player){
     std::cout << "You dealt " << damage << " damage to the enemy!\n";
 }
 
-//test
