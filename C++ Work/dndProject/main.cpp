@@ -11,7 +11,7 @@ void gameLoop();
 void enemyEncounter();
 void encounterType();
 void shopEncounter();
-void innEncoutner();
+void innEncounter();
 void playerAttack(Entity &enemy);
 void enemyAttack(Entity &player);
 
@@ -40,7 +40,7 @@ int main() {
                     break;
               default: std::cout << "Invalid option selected. Please select a valid option.\n";
             }
-    }while(choice != 3);
+    } while(choice != 3);
     return 0;
 }
 
@@ -63,14 +63,14 @@ void gameLoop(){
                 shopEncounter();
                 break;
             case 3:
-                innEncoutner();
+                innEncounter();
                 break; //placeholder
             case 4:
                 std::cout << "See you later!\n"; // Exit function.
                 break;
              default: std::cout << "Invalid event generated.\n";
         }
-    }while (choice != 4);
+    } while (choice != 4);
 }
 
 // Test Encounter Type Function
@@ -124,7 +124,7 @@ void enemyEncounter(){
                 break;
             default: std::cout << "Invalid option selected. Please select a valid option.\n";
         }
-    }while (choice != 3 && enemy.health > 0);
+    } while (choice != 3 && enemy.health > 0);
 }
 
 void shopEncounter(){
@@ -149,10 +149,10 @@ void shopEncounter(){
                 break; // Exit function.
             default: std::cout << "Invalid option selected. Please select a valid option.\n";
         }
-    }while (choice != 3);
+    } while (choice != 3);
 }
 
-void innEncoutner(){
+void innEncounter(){
     // Placeholder for inn encounter function.
 
     int choice = 0;
@@ -171,7 +171,7 @@ void innEncoutner(){
                 break; //placeholder
             default: std::cout << "Invalid option selected. Please select a valid option.\n";
         }
-    }while (choice != 2);
+    } while (choice != 2);
 }
 
 // Test Player Attack
@@ -199,4 +199,3 @@ void enemyAttack(Entity &player){
 
     std::cout << "You dealt " << damage << " damage to the enemy!\n";
 }
-
