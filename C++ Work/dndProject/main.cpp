@@ -7,6 +7,7 @@ struct Entity {
     int attackPower = 10; // Currently Irrelevant.
 };
 
+void gameLoop();
 void enemyEncounter();
 void encounterType();
 void playerAttack(Entity &enemy);
@@ -26,19 +27,48 @@ int main() {
 
            switch(choice){
               case 1:
-               std::cout << "Starting new game...\n";
-                  encounterType();
+                    std::cout << "Starting new game...\n";
+                    gameLoop();
                 break;
              case 2: 
                     std::cout << "Loading game...\n";
                     break;
            case 3:
                     std::cout << "Exiting game. Goodbye!\n";
-                     break;
+                    break;
               default: std::cout << "Invalid option selected. Please select a valid option.\n";
             }
     }while(choice != 3);
     return 0;
+}
+
+void gameLoop(){
+    // Placeholder for the main game loop. This will be where the player can explore, encounter enemies, find treasures, etc.
+    srand(time(NULL));
+    int choice = 0;
+
+    do{
+        std::cout << "Welcome to the game loop! What would you like to do?\n";
+        std::cout << "1. Explore\n2. Visit Shop\n3. Rest at the Inn\n4. Exit Game Loop\n";
+        std::cin >> choice;
+
+
+        switch(choice){
+            case 1:
+                encounterType();
+                break;
+         case 2:
+                std::cout << "You selected visit shop!\n";
+                break; //placeholder
+            case 3:
+                std::cout << "You selected rest at the inn!\n";
+                break; //placeholder
+            case 4:
+                std::cout << "See you later!\n"; // Exit function.
+                break;
+             default: std::cout << "Invalid event generated.\n";
+        }
+    }while (choice != 4);
 }
 
 // Test Encounter Type Function
