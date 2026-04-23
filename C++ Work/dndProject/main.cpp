@@ -12,6 +12,8 @@ void enemyEncounter();
 void encounterType();
 void shopEncounter();
 void innEncounter();
+void shopBuy();
+void playerInventory();
 void playerAttack(Entity &enemy);
 void enemyAttack(Entity &player);
 
@@ -51,7 +53,7 @@ void gameLoop(){
 
     do{
         std::cout << "Welcome to the game loop! What would you like to do?\n";
-        std::cout << "1. Explore\n2. Visit Shop\n3. Rest at the Inn\n4. Exit Game Loop\n";
+        std::cout << "1. Explore\n2. Visit Shop\n3. Rest at the Inn\n4. Check Inventory\n5. Exit Game Loop\n";
         std::cin >> choice;
 
 
@@ -66,11 +68,14 @@ void gameLoop(){
                 innEncounter();
                 break; //placeholder
             case 4:
+                playerInventory();
+                break; //placeholder
+            case 5:
                 std::cout << "See you later!\n"; // Exit function.
                 break;
              default: std::cout << "Invalid event generated.\n";
         }
-    } while (choice != 4);
+    } while (choice != 5);
 }
 
 // Test Encounter Type Function
@@ -140,6 +145,7 @@ void shopEncounter(){
         switch(choice){
             case 1:
                 std::cout << "You selected buy items!\n";
+                shopBuy();
                 break; //placeholder
             case 2:
                 std::cout << "You selected sell items!\n";
@@ -150,6 +156,18 @@ void shopEncounter(){
             default: std::cout << "Invalid option selected. Please select a valid option.\n";
         }
     } while (choice != 3);
+}
+
+void shopBuy(){
+    // Placeholder for shop buy function. This will be where the player can buy items from the shop.
+    std::string items[] = {"Sword", "Shield", "Health Potion"};
+
+    double prices[] = {50.0, 30.0, 10.0};
+
+    for(std::string item : items){
+        std::cout << item << '\n';
+    }
+
 }
 
 void innEncounter(){
@@ -185,6 +203,14 @@ void playerAttack(Entity &enemy){
     enemy.health -= damage; // Subtract damage from enemy health
 
     std::cout << "You dealt " << damage << " damage to the enemy!\n";
+}
+
+void playerInventory(){
+    std::string inventory[] = {"Iron Armor", "Copper Sword", "Health Potion"}; // Temporary Array to test inventory display.
+
+    for(std::string inventory : inventory){
+        std::cout << inventory << '\n';
+    }
 }
 
 // Test Enemy Attack
