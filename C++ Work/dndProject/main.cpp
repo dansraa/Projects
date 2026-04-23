@@ -10,6 +10,8 @@ struct Entity {
 void gameLoop();
 void enemyEncounter();
 void encounterType();
+void shopEncounter();
+void innEncoutner();
 void playerAttack(Entity &enemy);
 void enemyAttack(Entity &player);
 
@@ -58,10 +60,10 @@ void gameLoop(){
                 encounterType();
                 break;
          case 2:
-                std::cout << "You selected visit shop!\n";
-                break; //placeholder
+                shopEncounter();
+                break;
             case 3:
-                std::cout << "You selected rest at the inn!\n";
+                innEncoutner();
                 break; //placeholder
             case 4:
                 std::cout << "See you later!\n"; // Exit function.
@@ -123,6 +125,53 @@ void enemyEncounter(){
             default: std::cout << "Invalid option selected. Please select a valid option.\n";
         }
     }while (choice != 3 && enemy.health > 0);
+}
+
+void shopEncounter(){
+    // Placeholder for shop encounter function. This will be where the player can buy and sell items, weapons, armor, etc.
+
+    int choice = 0;
+
+    do{
+        std::cout << "Welcome to the shop! Enjoy my wares and take a gander!?\n";
+        std::cout << "1. Buy Items\n2. Sell Items\n3. Leave Shop\n";
+        std::cin >> choice;
+
+        switch(choice){
+            case 1:
+                std::cout << "You selected buy items!\n";
+                break; //placeholder
+            case 2:
+                std::cout << "You selected sell items!\n";
+                break; //placeholder
+            case 3:
+                std::cout << "You selected leave shop!\n";
+                break; // Exit function.
+            default: std::cout << "Invalid option selected. Please select a valid option.\n";
+        }
+    }while (choice != 3);
+}
+
+void innEncoutner(){
+    // Placeholder for inn encounter function.
+
+    int choice = 0;
+
+    do{
+        std::cout << "Welcome to the inn! Would you like to rest and recover your health?\n";
+        std::cout << "1. Rest\n2. Leave\n";
+        std::cin >> choice;
+
+        switch(choice){
+            case 1:
+                std::cout << "You selected yes!\n";
+                break; //placeholder
+            case 2:
+                std::cout << "You selected no!\n";
+                break; //placeholder
+            default: std::cout << "Invalid option selected. Please select a valid option.\n";
+        }
+    }while (choice != 2);
 }
 
 // Test Player Attack
