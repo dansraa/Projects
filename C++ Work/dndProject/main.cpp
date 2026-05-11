@@ -1,5 +1,6 @@
 #include <iostream>
 #include <ctime> //Randomness
+#include <iomanip> // For setting decimal precision in balance display.
 
 // Entity Stat Structure
 struct Entity {
@@ -7,19 +8,22 @@ struct Entity {
     int attackPower = 10; // Currently Irrelevant.
 };
 
-void gameLoop();
+void gameLoop(double balance);
 void enemyEncounter();
 void encounterType();
-void shopEncounter();
+void shopEncounter(double balance);
 void innEncounter();
 void shopBuy();
 void playerInventory();
 void playerAttack(Entity &enemy);
 void enemyAttack(Entity &player);
+void showBalance(double balance);
 
 
 // Main Menu
 int main() {
+
+    double balance = 100.0; // Starting balance for the player.
 
     int choice = 0;
 
@@ -32,7 +36,7 @@ int main() {
            switch(choice){
               case 1:
                     std::cout << "Starting new game...\n";
-                    gameLoop();
+                    gameLoop(balance);
                 break;
              case 2: 
                     std::cout << "Loading game...\n";
@@ -46,7 +50,7 @@ int main() {
     return 0;
 }
 
-void gameLoop(){
+void gameLoop(double balance){
     // Placeholder for the main game loop. This will be where the player can explore, encounter enemies, find treasures, etc.
     srand(time(NULL));
     int choice = 0;
@@ -62,7 +66,7 @@ void gameLoop(){
                 encounterType();
                 break;
          case 2:
-                shopEncounter();
+                shopEncounter(balance);
                 break;
             case 3:
                 innEncounter();
@@ -132,13 +136,16 @@ void enemyEncounter(){
     } while (choice != 3 && enemy.health > 0);
 }
 
-void shopEncounter(){
+void shopEncounter(double balance){
     // Placeholder for shop encounter function. This will be where the player can buy and sell items, weapons, armor, etc.
 
     int choice = 0;
 
+    balance = 100.0; // Temporary balance for testing shop encounter.
+
     do{
         std::cout << "Welcome to the shop! Enjoy my wares and take a gander!?\n";
+        showBalance(balance);
         std::cout << "1. Buy Items\n2. Sell Items\n3. Leave Shop\n";
         std::cin >> choice;
 
@@ -224,4 +231,8 @@ void enemyAttack(Entity &player){
     player.health -= damage; // Subtract damage from enemy health
 
     std::cout << "You dealt " << damage << " damage to the enemy!\n";
+}
+
+void showBalance(double balance){
+    std::cout << "Your current balance is: $"<< std::setprecision(2) << std::fixed << balance << '\n'; // Shows the players balance up to 2 decimals.
 }
