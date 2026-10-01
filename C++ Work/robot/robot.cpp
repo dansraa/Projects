@@ -2,6 +2,9 @@
 // Required for using 2d vectors.
 #include <vector>
 
+// Used for random number generation.
+#include <random>
+
 // Includes the queue library and algorithm library.
 #include <queue>
 #include <algorithm>
@@ -43,7 +46,8 @@ std::vector<std::vector<int>> grid = {
 };
 
 // const means the variable cannot be changed whatsoever.
-void printGrid(const std::vector<std::vector<int>>& grid, const Robot& robot, const Coordinate& coord);
+void generateMap(std::vector<std::vector<int>>& grid, const Robot& robot, const Coordinate& coord);
+void printGrid(std::vector<std::vector<int>>& grid, const Robot& robot, const Coordinate& coord);
 void moveRobot(Robot& robot, char direction);
 bool isValid(const Robot& robot, const std::vector<std::vector<int>>& grid);
 void findPath(Robot& robot, std::vector<std::vector<int>>& grid, const Coordinate& goal);
@@ -55,23 +59,16 @@ int main() {
 
     Coordinate goal = {0, 0};
 
-    do{
-        std::cout << "Enter robot's starting coordinates (x, y)";
-        std::cin >> robot.x >> robot.y;
+    std::cout << "Enter robot's starting coordinates (x, y)";
+    std::cin >> robot.x >> robot.y;
 
-        if (!isValid(robot, grid)) {
-            std::cout << "Invalid starting coordinates. Please try again. \n";
-        }
+    std::cout << "Enter the goal coordinates (x, y)";
+    std::cin >> goal.x >> goal.y;
 
-        std::cout << "Enter the goal coordinates (x, y)";
-        std::cin >> goal.x >> goal.y;
-
-        if (!isValid(Robot{goal.x, goal.y}, grid)) {
-            std::cout << "Invalid goal coordinates. Please try again. \n";
-        }
-    } while (!isValid(robot, grid) || !isValid(Robot{goal.x, goal.y}, grid));
+    generateMap(grid, robot, goal); // Generate the grid map with random values. Generates before user input to ensure tha the robot or goal coords are not obstructed by an obstacle.
 
     findPath(robot, grid, goal);
+
 };
 
 // Checks if the robot's coordinates are within the grid boundaries and are not an obstacle. Returns true if valid, false otherwise.
@@ -81,7 +78,7 @@ bool isValid(const Robot& robot, const std::vector<std::vector<int>>& grid) {
         return false; // Out of bounds.
     }
 
-    if (grid[robot.y][robot.x] == 1) {
+    if (grid[robot.y][robot.x] <= 15) { // If the grid is less than or equal to 15, hit obstacle.
         return false; // Hit an obstacle.
     }
 
@@ -125,9 +122,9 @@ void findPath(Robot& robot, std::vector<std::vector<int>>& grid, const Coordinat
                 std::this_thread::sleep_for(
                     std::chrono::milliseconds(300)
                 );
-                moveRobot(robot, move); // The robot is then moved to the goal.
-                markPath(grid, robot); // The path taken is marked on the grid.
-                printGrid(grid, robot, goal);
+                moveRobot(robot, move); // Robot moves for every move in the path. Moves in the direction specified by the character in the path.
+                markPath(grid, robot); // The mark path function flips the grids 0 to a 2 if the robots coordinates are on that point.
+                printGrid(grid, robot, goal); // Print the grid for every move in the path.
                 std::cout << std::endl;
                 std::cout << "Path to goal: ";
                 std::cout << move << " ";
@@ -164,20 +161,48 @@ void findPath(Robot& robot, std::vector<std::vector<int>>& grid, const Coordinat
     }
 }
 
+void generateMap(std::vector<std::vector<int>>& grid, const Robot& robot, const Coordinate& coord) {
+
+
+
+    // Loop through each point of the grid.
+    for (int y = grid.size() - 1; y >= 0; --y) {
+        for (int x = 0; x < grid[y].size(); ++x) {
+            std::random_device rd; // Obtains a random number seed from hardware.
+            std::mt19937 generator(rd()); // Initializes a Mersenne Twister random number generator with the seed from the random device.
+            std::uniform_int_distribution<int> distribution(0, 100); // Generate a number between 0, 100
+
+            int number = distribution(generator); // save the random number into number variable.
+            grid[y][x] = number; // The grid at the current x and y coordinates is set to the random number generated.
+        }
+    }
+
+    if(grid[robot.y][robot.x] <= 15) {
+        grid[robot.y][robot.x] = 100; // If the robot's starting position is an obstacle, set it to free space.
+        std::cout << "Robot starting position clearing of obstacles. \n";
+    }
+
+    if(grid[coord.y][coord.x] <= 15) {
+        grid[coord.y][coord.x] = 100; // If the goal position is an obstacle, set it to free space.
+        std::cout << "Goal position clearing of obstacles. \n";
+    }
+}
+
 // Prints the grid and the robot's position.
 // Takes in the 2D vector grid and prints it to the console.
-void printGrid(const std::vector<std::vector<int>>& grid, const Robot& robot, const Coordinate& coord) {
+void printGrid(std::vector<std::vector<int>>& grid, const Robot& robot, const Coordinate& coord) {
     // For every row in the grid, print each cell.
     for (int y = grid.size() - 1; y >= 0; --y) {
         // For every column in the row, print the cell.
         for (int x = 0; x < grid[y].size(); ++x) {
+
             if (robot.x == x && robot.y == y) {
                 std::cout << "R "; // Print robot position
             } else if (coord.x == x && coord.y == y) {
                 std::cout << "X "; // Print goal position
-            } else if (grid[y][x] == 1) {
+            } else if (grid[y][x] <= 15) {
                 std::cout << "# "; // Print obstacle
-            } else if (grid[y][x] == 2) {
+            } else if (grid[y][x] == 101) {
                 std::cout << "* "; // Print path taken, if grid value is a 2, print *.
             } else {
                 std::cout << ". "; // Print free space
@@ -209,5 +234,5 @@ void markPath(std::vector<std::vector<int>>& grid, const Robot& robot) {
     int x = robot.x;
     int y = robot.y;
 
-    grid[y][x] = 2;
+    grid[y][x] = 101;
 }
